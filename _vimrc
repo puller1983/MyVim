@@ -19,11 +19,11 @@ behave mswin
 " }}}
 
 " My Setup of options {{{
-se nohlsearch
+se hlsearch
 se nobackup
 se nowritebackup 
-se relativenumber "rnu
-se number "nu
+"se relativenumber "rnu
+"se number "nu
 se ruler "ru
 se autoindent  "ai
 se shiftwidth=4
@@ -43,7 +43,7 @@ elseif os == "Unix"
   set undodir=/tmp/,.
 endif
 se undofile
-se guioptions-=T
+se guioptions-=T "go, remove toolbar
 " se cscopequickfix=s-,c-,d-,i-,t-,e-
 " se foldmethod=syntax
 " }}}
@@ -60,7 +60,7 @@ if has("multi_byte")
 endif
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-language messages zh_TW.utf-8
+" language messages zh_TW.utf-8
 " }}}
 
 " plugin manager : vundle {{{
@@ -76,7 +76,7 @@ Plugin 'gmarik/vundle'
 " repos on github {{{
 " for auto-pair
 Plugin 'Raimondi/delimitMate'
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'scrooloose/nerdtree'
 " Riv is a vim plugin for taking notes with reStructuredText.
@@ -202,18 +202,20 @@ augroup filetype_
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 augroup END
 
-" Only rnu in the current window
-augroup relativeNumber
-  autocmd!
-  autocmd WinEnter * setlocal rnu
-  autocmd WinLeave * setlocal nornu
-augroup END
+"" Only rnu in the current window
+"augroup relativeNumber
+"  autocmd!
+"  autocmd WinEnter * setlocal rnu
+"  autocmd WinLeave * setlocal nornu
+"augroup END
 
 "}}}
 
 " map {{{
 " use original CTRL-Y in insert mode
 iunmap <C-Y>
+" use original CTRL-V
+unmap <C-V>
 
 " use \s to Search and replace the word under the cursor 
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
