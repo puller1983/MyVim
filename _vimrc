@@ -18,13 +18,20 @@ behave mswin
 " source $Vim\IDE.vim
 " }}}
 
+" cscope
+if os == "unix"
+    source ~/.vim/bundle/cscope/cscope_maps.vim
+    se cscopeprg=cscope\ -C
+    se csre
+endif
+
 " My Setup of options {{{
 se hlsearch
 se nobackup
 se nowritebackup 
 "se relativenumber "rnu
 "se number "nu
-se ruler "ru
+"se ruler "ru
 se autoindent  "ai
 se shiftwidth=4
 se laststatus=2
@@ -39,7 +46,7 @@ if os == "win"
 endif
 if os == "win"
   set undodir=C:\\WINDOWS\\TEMP\\
-elseif os == "Unix"
+elseif os == "unix"
   set undodir=/tmp/,.
 endif
 se undofile
@@ -215,7 +222,9 @@ augroup END
 " use original CTRL-Y in insert mode
 iunmap <C-Y>
 " use original CTRL-V
-unmap <C-V>
+if os == 'unix'
+    unmap <C-V>
+endif
 
 " use \s to Search and replace the word under the cursor 
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -223,9 +232,9 @@ unmap <C-V>
 " Execute python file being edited with <Shift> + F5:
 map <S-F5> :w<CR>:!start cmd /c % & pause<CR>
 
-" use <C-w>g and <C-w>; to go to the leftest/rightest window
-" g is left to h, and ; is right to l
-map <C-w>g 10<C-w>h
+" use <C-w>a and <C-w>; to go to the leftest/rightest window
+" a is leftest, and ; is right to l
+map <C-w>a 10<C-w>h
 map <C-w>; 10<C-w>l
 
 " }}}
