@@ -178,6 +178,14 @@ Window
 
   Close current window.
 
+* ``<C-W> o``
+
+  Leave current window only.
+
+* ``<C-W> G F/f``
+
+  Open the path under the cursor in new tab
+
 
 Buffer
 ======
@@ -198,3 +206,9 @@ Buffer
   Unload buffer and delete it from buffer list.
 
 
+vim-fugitive
+============
+
+* ``:Gstatus``, ``<S-D>``, and ``-``
+
+  Use :Gstatus to show status, use ``<S-D>`` to show difference and use ``-`` to set the file in and out stage
