@@ -72,11 +72,11 @@ source $VIMRUNTIME/menu.vim
 
 " plugin manager : vundle {{{
 filetype off " required!
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " let Vundle manage Vundle, required! 
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here: {{{
 "
