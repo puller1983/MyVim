@@ -87,8 +87,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'scrooloose/nerdtree'
 " Riv is a vim plugin for taking notes with reStructuredText.
-Plugin 'Rykka/riv.vim'
-let g:riv_ignored_nmaps = "<Tab>,<S-Tab>" " original <C-i>
+" Plugin 'Rykka/riv.vim'
+" let g:riv_ignored_nmaps = "<Tab>,<S-Tab>" " original <C-i>
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'tpope/vim-rails.git'
 " Plugin 'fholgado/minibufexpl.vim'
@@ -126,7 +126,7 @@ let g:riv_ignored_nmaps = "<Tab>,<S-Tab>" " original <C-i>
 " Plugin 'DoxyGen-Syntax'
 " }}}
 
-Plugin 'Align'
+" Plugin 'Align'
 Plugin 'cmdline-completion'
 Plugin 'a.vim'
 "not alternate to a file/buffer which does not exist
@@ -139,10 +139,10 @@ Plugin 'LogiPat'
 Plugin 'L9' " necessary for FuzzyFinder
 Plugin 'FuzzyFinder'
 Plugin 'matchit.zip'
-Plugin 'taglist.vim'
-if os == 'win'
-  let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
-endif
+"Plugin 'taglist.vim'
+"if os == 'win'
+"  let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
+"endif
 Plugin 'LargeFile'
 let g:LargeFile = 100
 " Plugin 'OmniCppComplete'
