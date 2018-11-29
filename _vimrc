@@ -51,6 +51,7 @@ elseif os == "unix"
 endif
 se undofile
 se guioptions-=T "go, remove toolbar
+se guioptions-=m "remove menubar, not source the menu script
 " se cscopequickfix=s-,c-,d-,i-,t-,e-
 " se foldmethod=syntax
 " }}}
@@ -92,6 +93,11 @@ Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'tpope/vim-rails.git'
 " Plugin 'fholgado/minibufexpl.vim'
+Plugin 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+Plugin 'Valloric/YouCompleteMe'
 
 " python complete plugin {{{
 " good python complete plugin
