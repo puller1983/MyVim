@@ -16,14 +16,20 @@ behave mswin
 
 " "one click compile setup
 " source $Vim\IDE.vim
-" }}}
 
 " cscope
 if os == "unix"
-    source ~/.vim/bundle/cscope/cscope_maps.vim
+    source ~/.vim/bundle/cscope_map.vim/plugin/cscope_maps.vim
     se cscopeprg=cscope\ -C
     se csre
 endif
+
+" Use rg as external grep
+if executable("rg")
+    set grepprg=rg\ --vimgrep
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+" }}}
 
 " My Setup of options {{{
 se hlsearch
@@ -50,10 +56,12 @@ elseif os == "unix"
   set undodir=/tmp/,.
 endif
 se undofile
-se guioptions-=T "go, remove toolbar
+se guioptions-=T "remove toolbar
 se guioptions-=m "remove menubar, not source the menu script
 " se cscopequickfix=s-,c-,d-,i-,t-,e-
 " se foldmethod=syntax
+se viminfo+=:100
+se splitright
 " }}}
 
 " solve encoding problem {{{
@@ -84,6 +92,7 @@ Plugin 'VundleVim/Vundle.vim'
 " repos on github {{{
 " for auto-pair
 Plugin 'Raimondi/delimitMate'
+" git wrapper for vim
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'scrooloose/nerdtree'
@@ -93,11 +102,13 @@ Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'tpope/vim-rails.git'
 " Plugin 'fholgado/minibufexpl.vim'
+" run shell commands in background and read output in the quickfix window in realtime
+Plugin 'skywind3000/asyncrun.vim'
 Plugin 'mileszs/ack.vim'
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " python complete plugin {{{
 " good python complete plugin
@@ -141,10 +152,10 @@ let g:alternateNoDefaultAlternate = 1
 " let g:miniBufExplMapCTabSwitchBufs = 1
 " let g:miniBufExplModSelTarget = 1
 " Plugin 'snipMate'
-Plugin 'LogiPat'
-Plugin 'L9' " necessary for FuzzyFinder
-Plugin 'FuzzyFinder'
-Plugin 'matchit.zip'
+"Plugin 'LogiPat'
+"Plugin 'L9' " necessary for FuzzyFinder
+"Plugin 'FuzzyFinder'
+"Plugin 'matchit.zip'
 "Plugin 'taglist.vim'
 "if os == 'win'
 "  let Tlist_Ctags_Cmd = 'C:\ctags58\ctags.exe'
@@ -222,6 +233,11 @@ augroup END
 "  autocmd WinLeave * setlocal nornu
 "augroup END
 
+augroup fugitive
+    autocmd!
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
 "}}}
 
 " map {{{
@@ -234,6 +250,8 @@ endif
 
 " use \s to Search and replace the word under the cursor 
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+:nnoremap <Leader>v :v/\<<C-r><C-w>\>/d<Left><Left>
+:nnoremap <Leader>g :g/\<<C-r><C-w>\>/d<Left><Left>
 
 " Execute python file being edited with <Shift> + F5:
 map <S-F5> :w<CR>:!start cmd /c % & pause<CR>
@@ -242,6 +260,10 @@ map <S-F5> :w<CR>:!start cmd /c % & pause<CR>
 " a is leftest, and ; is right to l
 map <C-w>a 10<C-w>h
 map <C-w>; 10<C-w>l
+
+" use // after selection to search for visually selected text
+" from https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>")
 
 " }}}
 
